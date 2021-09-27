@@ -41,7 +41,6 @@ public class MainWindow extends JFrame {
     public JButton aboutButton;
     public JButton exitButton;
 
-
     public JPanel listPanel;
     public JLabel wordsLabel;
 
@@ -60,9 +59,20 @@ public class MainWindow extends JFrame {
     public StatusBar statusBar;
 
     public MainWindow() {
+        initUI();
+    }
+    private void initUI() {
         appLabel = new JLabel("Szógyűjtő");
         urlField = new JTextField();        
 
+        initCollectorPanel();
+        initlistPanel();
+        initListButtonPanel();
+        initbottomPanel();
+        initMainWindow();
+    }
+
+    private void initCollectorPanel() {
         collectorPanel = new JPanel();
         collectorPanel.setLayout(new BoxLayout(collectorPanel, BoxLayout.LINE_AXIS));
         pasteButton = new JButton("Beillesztés");
@@ -73,9 +83,10 @@ public class MainWindow extends JFrame {
         this.collectorPanel.add(pasteButton);
         this.collectorPanel.add(startButton);
         this.collectorPanel.add(aboutButton);
-        this.collectorPanel.add(exitButton);
+        this.collectorPanel.add(exitButton);        
+    }
 
-
+    private void initlistPanel() {
         listPanel = new JPanel();
         listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.PAGE_AXIS));
         wordsLabel = new JLabel("Talált szavak");
@@ -84,8 +95,10 @@ public class MainWindow extends JFrame {
         wordsList = new JList<>(wordsModel);
         wordsScrollPane = new JScrollPane(wordsList);
         listPanel.add(wordsLabel);
-        listPanel.add(wordsScrollPane);
+        listPanel.add(wordsScrollPane);        
+    }
 
+    private void initListButtonPanel() {
         deleteButton = new JButton("Törlés");
         deleteButton.setMinimumSize(new Dimension(110, 25));
         deleteButton.setMaximumSize(new Dimension(110, 25));
@@ -122,14 +135,16 @@ public class MainWindow extends JFrame {
         listButtonsPanel.add(saveButton);
         listButtonsPanel.add(Box.createVerticalGlue());
         listButtonsPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+    }
 
+    private void initbottomPanel() {
         bottomPanel = new JPanel();
         bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.LINE_AXIS));
         bottomPanel.add(listPanel);
-        bottomPanel.add(listButtonsPanel);
-        
+        bottomPanel.add(listButtonsPanel);        
+    }
 
-
+    private void initMainWindow() {
         this.setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
 
         this.add(appLabel);
@@ -137,17 +152,14 @@ public class MainWindow extends JFrame {
         this.add(collectorPanel);
         this.add(bottomPanel);
         
-        
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // this.setSize(300, 250);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);        
         this.pack();
         /**
          * A pack() után kell szerepeljen, mert az ablak mérete
          * csak az után van meg.
          */
         statusBar = new StatusBar(this.getWidth());
-        this.add(statusBar);
-
+        this.add(statusBar);        
     }
     
 }
