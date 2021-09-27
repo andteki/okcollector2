@@ -1,13 +1,14 @@
 /*
  * File: MainWindow.java
  * Created Date: 2021-09-24 10:36:27
- * Author: Sallai Andras
+ * Author: Nagy János
+ * Original: recolletor, Sallai Andras
  * Github: https://github.com/andteki
  * -----
  * Last Modified: 2021-09-24
- * Modified By: Sallai Andras
+ * Modified By: Nagy János
  * -----
- * Copyright (c) 2021 Sallai Andras
+ * Copyright (c) 2021 Nagy János
  * 
  * GNU GPL v2
  */
