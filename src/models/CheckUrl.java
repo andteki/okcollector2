@@ -19,9 +19,9 @@ public class CheckUrl {
     // TODO: beírt URL ellenőrző
     public void check(String url) {
 
-    }//URL ellenőrzés vége
+    }
     // TODO: ha nincs https:// akkor kiegészítjük
     public void expandProtocol() {
 
-    }//URL kiegészítés vége
+    }
 }
