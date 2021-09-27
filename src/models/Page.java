@@ -26,21 +26,26 @@ import org.jsoup.nodes.Document;
 
 public class Page {
     public String url;
+
     public ArrayList<String> getContent() {
+        ArrayList<String> wordList = null;
+        try {
+            tryGetContent();
+        } catch (IOException e) {
+            System.err.println("Hiba! A weblap nem olvasható");
+        }
+        return wordList;
+    }
+
+    public ArrayList<String> tryGetContent() throws IOException {
         String result = "semmi";
         ArrayList<String> wordList = new ArrayList<>();
         if (!url.isEmpty()) {
-            try {
-                Connection conn = Jsoup.connect(this.url);
-                Document doc = conn.get();
-                result = doc.body().text();
-                
-                } catch (IOException e) {
-                    System.err.println("Hiba! A weblap nem olvasható");
-                }
-                result = result.replaceAll("\\p{Punct}", "");
-                result = result.replaceAll("[©0-9]", "");
-                result = result.trim().replaceAll(" +", "\n");
+            Connection conn = Jsoup.connect(this.url);
+            Document doc = conn.get();
+            result = doc.body().text();
+
+            filterContent(result);
         
         }else {
             System.err.println("Hiba! Az url nincs beállítva!");
@@ -54,6 +59,14 @@ public class Page {
         Collections.sort(wordList);
         return wordList;
     }
+
+    private String filterContent(String result) {
+        result = result.replaceAll("\\p{Punct}", "");
+        result = result.replaceAll("[©0-9]", "");
+        result = result.trim().replaceAll(" +", "\n");
+        return result;
+    }
+
     public void setUrl(String url) {
         this.url = url;
     }
