@@ -30,16 +30,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import controllers.CollectorController;
+
 public class MainWindow extends JFrame {
 
     public JLabel appLabel;
     public JTextField urlField;
 
-    public JPanel collectorPanel;
-    public JButton pasteButton;
-    public JButton startButton;
-    public JButton aboutButton;
-    public JButton exitButton;
+    public CollectorPanel collectorPanel;
 
     public JPanel listPanel;
     public JLabel wordsLabel;
@@ -61,29 +59,17 @@ public class MainWindow extends JFrame {
     public MainWindow() {
         initUI();
     }
+
     private void initUI() {
         appLabel = new JLabel("Szógyűjtő");
         urlField = new JTextField();        
-
-        initCollectorPanel();
+        
+        collectorPanel = new CollectorPanel();
+        new CollectorController(this, collectorPanel);
         initlistPanel();
         initListButtonPanel();
         initbottomPanel();
         initMainWindow();
-    }
-
-    private void initCollectorPanel() {
-        collectorPanel = new JPanel();
-        collectorPanel.setLayout(new BoxLayout(collectorPanel, BoxLayout.LINE_AXIS));
-        pasteButton = new JButton("Beillesztés");
-        startButton = new JButton("Start");
-        aboutButton = new JButton("Névjegy");
-        exitButton = new JButton("Kilépés");
-
-        this.collectorPanel.add(pasteButton);
-        this.collectorPanel.add(startButton);
-        this.collectorPanel.add(aboutButton);
-        this.collectorPanel.add(exitButton);        
     }
 
     private void initlistPanel() {

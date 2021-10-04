@@ -22,8 +22,7 @@ import views.MainWindow;
 public class App {
     public static void main(String[] args) {
         MainWindow mainWindow = new MainWindow();
-        new MainController(mainWindow);
-        new CollectorController(mainWindow);
+        new MainController(mainWindow);        
         new WordsController(mainWindow);
         mainWindow.setVisible(true);
     }

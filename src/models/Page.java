@@ -30,7 +30,7 @@ public class Page {
     public ArrayList<String> getContent() {
         ArrayList<String> wordList = null;
         try {
-            tryGetContent();
+            wordList = tryGetContent();
         } catch (IOException e) {
             System.err.println("Hiba! A weblap nem olvasható");
         }
@@ -39,25 +39,16 @@ public class Page {
 
     public ArrayList<String> tryGetContent() throws IOException {
         String result = "semmi";
-        ArrayList<String> wordList = new ArrayList<>();
+        String body = "";
         if (!url.isEmpty()) {
             Connection conn = Jsoup.connect(this.url);
             Document doc = conn.get();
             result = doc.body().text();
-
-            filterContent(result);
-        
+            body = filterContent(result);        
         }else {
             System.err.println("Hiba! Az url nincs beállítva!");
         }
-
-        Scanner scanner = new Scanner(result);
-        while(scanner.hasNextLine()) {
-            wordList.add(scanner.nextLine());
-        }
-        scanner.close();
-        Collections.sort(wordList);
-        return wordList;
+        return convertToArray(body);
     }
 
     private String filterContent(String result) {
@@ -65,6 +56,17 @@ public class Page {
         result = result.replaceAll("[©0-9]", "");
         result = result.trim().replaceAll(" +", "\n");
         return result;
+    }
+
+    private ArrayList<String> convertToArray(String body) {
+        ArrayList<String> wordList = new ArrayList<>();
+        Scanner scanner = new Scanner(body);
+        while(scanner.hasNextLine()) {
+            wordList.add(scanner.nextLine());
+        }
+        scanner.close();
+        Collections.sort(wordList);
+        return wordList;
     }
 
     public void setUrl(String url) {
